@@ -36,3 +36,20 @@ class Store < ActiveRecord::Base
     end
   end
 end
+
+# Ask the user for a store name
+print "Enter a store name: "
+store_name = gets.chomp
+
+# Attempt to create a store with the inputted name but leave out the other fields
+store = Store.new(name: store_name)
+
+# Save/create the record and display error messages if any
+if store.save
+  puts "Store '#{store.name}' created successfully!"
+else
+  puts "Error(s) occurred while creating the store:"
+  store.errors.full_messages.each do |message|
+    puts message
+  end
+end
